@@ -27,7 +27,7 @@ const TextInput = ({
   );
 };
 
-TextInput.defaultProps = {
+export default TextInput.defaultProps = {
   type: "text",
   className: "",
 };
