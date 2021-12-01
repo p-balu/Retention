@@ -1,0 +1,40 @@
+.header-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 15px 15px;
+  min-height: 5vh;
+  max-height: 7vh;
+  background-color: rgba(17, 24, 39);
+  box-shadow: 1px 1px 5px 3px rgba(31, 41, 55);
+}
+
+.header-image {
+  width: 40px;
+  height: 40px;
+}
+
+.header-text {
+  font-family: "myFont1";
+  margin-left: 10px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #52bde7;
+  text-transform: none;
+}
+
+.header-logo-text {
+  display: flex;
+  width: 5%;
+  justify-content: space-between;
+}
+
+.header-navigation {
+  padding: 10px 5px;
+}
+
+.header-link {
+  text-decoration: none;
+  color: white;
+  cursor: pointer;
+}
