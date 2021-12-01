@@ -6,10 +6,10 @@
 
  1. Create a new file `.babelrc` inside the project folder and add the below code i.e.presets and plugins to that specific file
 
-    {
-     "presets": ["@babel/preset-react"],
-     "plugins": ["@babel/plugin-proposal-class-properties"]
-    }
+   ### {
+     ###"presets": ["@babel/preset-react"],
+     ###"plugins": ["@babel/plugin-proposal-class-properties"]
+    ###}
 
  2. Run `npm install`
  
