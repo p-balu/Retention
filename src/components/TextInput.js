@@ -1,5 +1,6 @@
 import React from "react";
-
+import "./TextInput.css";
+import PropTypes from "prop-types";
 const TextInput = ({
   name,
   type,
@@ -13,7 +14,9 @@ const TextInput = ({
 }) => {
   return (
     <>
-      <label htmlFor={name}>{label}</label>
+      <label htmlFor={name} style={{ color: "black", textAlign: "left" }}>
+        {label}
+      </label>
       <input
         id={name}
         name={name}
@@ -27,9 +30,9 @@ const TextInput = ({
   );
 };
 
-export default TextInput.defaultProps = {
+TextInput.defaultProps = {
   type: "text",
-  className: "",
+  className: "text-input",
 };
 
 TextInput.propTypes = {
@@ -40,3 +43,5 @@ TextInput.propTypes = {
   value: PropTypes.any,
   onChange: PropTypes.func.isRequired,
 };
+
+export default TextInput;

@@ -1,12 +1,13 @@
 import React from "react";
+import Form from "./Form";
 import Header from "./Header";
 
 const User = () => {
   return (
-    <div>
+    <>
       <Header />
-      <p>User page under construction</p>
-    </div>
+      <Form />
+    </>
   );
 };
 export default User;
