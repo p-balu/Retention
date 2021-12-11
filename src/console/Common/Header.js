@@ -1,6 +1,6 @@
 import React from "react";
-import logo from "../assets/logo.png";
-import { useLocation, Link } from "react-router-dom";
+import logo from "../../assets/logo.png";
+import { useLocation, Link, NavLink } from "react-router-dom";
 import "./Header.css";
 
 const Header = () => {
@@ -11,21 +11,18 @@ const Header = () => {
         <img src={logo} alt={logo} className="header-image" />
         <span className="header-text">Predict</span>
       </div>
-
-      {location.pathname === "/" && (
+      <div className="navLinks">
         <div className="header-navigation">
-          <Link to="/admin" className="header-link">
-            Admin
-          </Link>
-        </div>
-      )}
-      {location.pathname === "/admin" && (
-        <div className="header-navigation">
-          <Link to="/" className="header-link">
+          <NavLink to="/" className="header-link">
             User
-          </Link>
+          </NavLink>
         </div>
-      )}
+        <div className="header-navigation">
+          <NavLink to="/admin" className="header-link">
+            Admin
+          </NavLink>
+        </div>
+      </div>
     </div>
   );
 };

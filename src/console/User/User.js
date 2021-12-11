@@ -1,6 +1,6 @@
 import React from "react";
 import Form from "./Form";
-import Header from "./Header";
+import Header from "../Common/Header";
 
 const User = () => {
   return (

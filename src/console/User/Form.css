@@ -1,0 +1,86 @@
+.form-container {
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);
+  max-width: 50%;
+  border: 1px solid #c8cdd2;
+  margin-top: 4%;
+  padding: 12px;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.form-login-container {
+  background-color: #fff;
+  margin-left: auto;
+  margin-right: auto;
+  box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);
+  max-width: 25%;
+  border: 1px solid #c8cdd2;
+  margin-top: 4%;
+  padding: 25px 35px;
+}
+h3 {
+  font-size: 2.25rem;
+  font-weight: 300;
+  line-height: 1rem;
+  text-align: center;
+  color: black;
+}
+
+.formFields {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 15px;
+}
+
+.text-input {
+  border-radius: 0.25rem;
+  border: 1px solid #96a0aa;
+  height: 1.75rem;
+  padding: 0.625rem 1rem;
+  width: 96%;
+  color: black;
+}
+
+.field {
+  display: flex;
+  flex-direction: column;
+  width: 28%;
+}
+
+.field-1 {
+  display: flex;
+  flex-direction: column;
+  width: 96%;
+  margin-bottom: 1%;
+}
+
+.button {
+  background: #13a0c7;
+  color: #fff;
+  height: 2.5rem;
+  padding: 0 1rem;
+  margin-top: 3%;
+  font-size: medium;
+  font-weight: 500;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 2%;
+  cursor: pointer;
+}
+
+.button:hover {
+  background: #096e8a;
+}
+
+.error-message {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  text-align: center;
+  padding: 14px;
+}
