@@ -3,55 +3,72 @@ import "./Form.css";
 import axios from "axios";
 class Form extends Component {
   state = {
-    intakeTermCode: "",
+    intakeCollegeExperience: "",
     primaryProgramCode: 6809,
     programLongName: "",
     programSemesters: 2,
     totalProgramSemesters: 2,
     postalCode: "",
-    mailingCountryName: "",
+    mailingCountryName: "Canada",
     currentStayStatus: "",
     academicPerformance: "",
-    gradTermCode: "",
+    gradTermCode:200705 ,
     persistanceCount: "",
     averageMarks: 74,
     englishTestScore: 160,
     age: 25,
-    firstLanguage: "",
+    success: "",
+    failure: "",
+    error: "",
   };
 
-  componentDidMount() {
+  handleSubmit = async (event) => {
+    event.preventDefault();
     const request = {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        ACADEMIC_PERFORMANCE: "AB - Good",
-        AGE_GROUP_LONG_NAME: "21 to 25",
-        CURRENT_STAY_STATUS: "",
-        ENGLISH_TEST_SCORE: 160,
-        EXPECTED_GRAD_TERM_CODE: null,
-        FIRST_YEAR_PERSISTENCE_COUNT: null,
-        HS_AVERAGE_MARKS: 69,
-        INTAKE_COLLEGE_EXPERIENCE: "CE Enrolled",
-        MAILING_POSTAL_CODE_GROUP_3: "M1T",
-        PRIMARY_PROGRAM_CODE: null,
-        PROGRAM_LONG_NAME: "Community and Justice Services",
-        PROGRAM_SEMESTERS: null,
-        TOTAL_PROGRAM_SEMESTERS: null,
+        ACADEMIC_PERFORMANCE: academicPerformance.value,
+        AGE_GROUP_LONG_NAME: age.value,
+        CURRENT_STAY_STATUS: currentStayStatus.value,
+        ENGLISH_TEST_SCORE: englishTestScore.value,
+        EXPECTED_GRAD_TERM_CODE: gradTermCode.value,
+        FIRST_YEAR_PERSISTENCE_COUNT: persistanceCount.value,
+        HS_AVERAGE_MARKS: averageMarks.value,
+        INTAKE_COLLEGE_EXPERIENCE: intakeCollegeExperience.value,
+        MAILING_POSTAL_CODE_GROUP_3: postalCode.value,
+        PRIMARY_PROGRAM_CODE: primaryProgramCode.value,
+        PROGRAM_LONG_NAME: programLongName.value,
+        PROGRAM_SEMESTERS: programSemesters.value,
+        TOTAL_PROGRAM_SEMESTERS: totalProgramSemesters.value,
       }),
     };
-    fetch("http://localhost:9000/predict/", request).then((res) =>
-      console.log("successfull", res)
-    );
-  }
-  handleSubmit = (event) => {
-    event.preventDefault();
+    fetch("http://localhost:9000/predict/", request)
+      .then((res) => res.json())
+      .then((data) => {
+        console.log(data.prediction);
+        if (data.prediction == 1) {
+          this.setState({
+            success: "Model predicts the student is Successfull ",
+            failure: "",
+          });
+        } else {
+          this.setState({
+            success: "",
+            failure: "Model predicts the student is UnSuccessfull ",
+          });
+        }
+      });
   };
 
   render() {
+    const { success, failure } = this.state;
     return (
       <div className="form-container">
         <h3>Predict</h3>
+        {success && success.length > 0 && <p className="success">{success}</p>}
+        {failure && failure.length > 0 && <p className="failure">{failure}</p>}
+
         <form onSubmit={this.handleSubmit}>
           <div className="formFields">
             <div className="field">
@@ -59,20 +76,28 @@ class Form extends Component {
                 htmlFor="intakeTermCode"
                 style={{ color: "black", textAlign: "left" }}
               >
-                Intake Term Code *
+                Intake College Experience *
               </label>
-              <input
-                type="number"
-                name="intakeTermCode"
-                className="text-input"
-                placeholder="Enter Intake Term Code MMYYYY"
+              <select
+                name="intakeCollegeExperience"
+                className="text-input-drop-down"
+                placeholder="Enter Intake College Experience"
                 onChange={(event) =>
-                  this.setState({ intakeTermCode: event.target.value })
+                  this.setState({ intakeCollegeExperience: event.target.value })
                 }
-                value={this.state.intakeTermCode}
-                id="intakeTermCode"
+                value={this.state.intakeCollegeExperience}
+                id="intakeCollegeExperience"
                 required
-              />
+              >
+                <option value="">Select Intake College Experience</option>
+                <option value="New to College">New to College</option>
+                <option value="CE Enrolled"> CE Enrolled</option>
+                <option value="Enrolled">Enrolled</option>
+                <option value="Prep Program Enrolled">
+                  Prep Program Enrolled
+                </option>
+                <option value="Graduate">Graduate</option>
+              </select>
             </div>
             <div className="field">
               <label
@@ -199,6 +224,7 @@ class Form extends Component {
                 required
               />
             </div>
+
             <div className="field">
               <label
                 htmlFor="currentStayStatus"
@@ -206,19 +232,67 @@ class Form extends Component {
               >
                 Current Stay Status *
               </label>
-              <input
-                type="text"
+              <select
                 name="currentStayStatus"
-                className="text-input"
-                placeholder="Enter Current Stay Status"
+                className="text-input-drop-down"
+                placeholder="Enter Intake College Experience"
                 onChange={(event) =>
                   this.setState({ currentStayStatus: event.target.value })
                 }
                 value={this.state.currentStayStatus}
                 id="currentStayStatus"
                 required
-              />
+              >
+                <option value="">Select Intake College Experience</option>
+                <option value="Graduated - On Time">Graduated - On Time</option>
+                <option value="Graduated - Different Intake">
+                  Graduated - Different Intake
+                </option>
+                <option value="Graduated - Extended Time">
+                  Graduated - Extended Time
+                </option>
+                <option value="Graduated - Different Program">
+                  Graduated - Different Program
+                </option>
+                <option value="Completed - Preparatory Program">
+                  Completed - Preparatory Program
+                </option>
+                <option value="Left College - Enrolled 1 Term">
+                  Left College - Enrolled 1 Term
+                </option>
+                <option value="Left College - Enrolled 2 Terms">
+                  Left College - Enrolled 2 Terms
+                </option>
+                <option value="Left College - Enrolled 3 Terms">
+                  Left College - Enrolled 3 Terms
+                </option>
+                <option value="Left College - Enrolled 4 Terms">
+                  Left College - Enrolled 4 Terms
+                </option>
+                <option value="Left College - Enrolled 5 or more Terms">
+                  Left College - Enrolled 5 or more Terms
+                </option>
+                <option value="Stepped Out - 1 Term Away">
+                  Stepped Out - 1 Term Away
+                </option>
+                <option value="Stepped Out - 2 Terms Away">
+                  Stepped Out - 2 Terms Away
+                </option>
+                <option value="Studying - Different Intake">
+                  Studying - Different Intake
+                </option>
+                <option value="Studying - Different Program">
+                  Studying - Different Program
+                </option>
+                <option value="Studying - Intake Program - Extended Time">
+                  Studying - Intake Program - Extended Time
+                </option>
+                <option value="Studying - Intake Program - On Time">
+                  Studying - Intake Program - On Time
+                </option>
+              </select>
             </div>
+
             <div className="field">
               <label
                 htmlFor="academicPerformance"
@@ -226,18 +300,22 @@ class Form extends Component {
               >
                 Academic Performance *
               </label>
-              <input
-                type="text"
+              <select
                 name="academicPerformance"
-                className="text-input"
-                placeholder="Enter Academic Performance"
+                className="text-input-drop-down"
                 onChange={(event) =>
                   this.setState({ academicPerformance: event.target.value })
                 }
                 value={this.state.academicPerformance}
                 id="academicPerformance"
                 required
-              />
+              >
+                <option value="">Select Academic Performance</option>
+                <option value="AB - Good">Good</option>
+                <option value="C - Satisfactory">Satisfactory</option>
+                <option value="DF - Poor">Poor</option>
+                <option value="ZZ - Unknown">Unknown</option>
+              </select>
             </div>
           </div>
 
@@ -247,13 +325,13 @@ class Form extends Component {
                 htmlFor="gradTermCode"
                 style={{ color: "black", textAlign: "left" }}
               >
-                Expected Grad Term Code *
+                Expected GradTerm Code (yyyymm)*
               </label>
               <input
                 type="number"
                 name="gradTermCode"
                 className="text-input"
-                placeholder="Enter Grad Term Code MMYYYY"
+                placeholder="Enter Grad Term Code YYYYM"
                 onChange={(event) =>
                   this.setState({ gradTermCode: event.target.value })
                 }
@@ -269,18 +347,20 @@ class Form extends Component {
               >
                 First Year Persistance Count *
               </label>
-              <input
-                type="number"
+              <select
                 name="persistanceCount"
-                className="text-input"
-                placeholder="Enter First Year Persistance Count"
+                className="text-input-drop-down"
                 onChange={(event) =>
                   this.setState({ persistanceCount: event.target.value })
                 }
                 value={this.state.persistanceCount}
                 id="persistanceCount"
                 required
-              />
+              >
+                <option value="">Select Academic Performance</option>
+                <option value="0">0</option>
+                <option value="1">1</option>
+              </select>
             </div>
             <div className="field">
               <label
@@ -304,8 +384,8 @@ class Form extends Component {
             </div>
           </div>
 
-          <div className="formFields">
-            <div className="field">
+          <div className="formFields1">
+            <div className="field1">
               <label
                 htmlFor="englishTestScore"
                 style={{ color: "black", textAlign: "left" }}
@@ -316,7 +396,7 @@ class Form extends Component {
                 type="number"
                 name="englishTestScore"
                 className="text-input"
-                placeholder="Enter English Test Score"
+                placeholder="Enter HS Average Marks"
                 onChange={(event) =>
                   this.setState({ englishTestScore: event.target.value })
                 }
@@ -325,43 +405,34 @@ class Form extends Component {
                 required
               />
             </div>
-            <div className="field">
+            <div className="field1">
               <label
                 htmlFor="age"
                 style={{ color: "black", textAlign: "left" }}
               >
                 Age *
               </label>
-              <input
-                type="number"
+              <select
                 name="age"
-                className="text-input"
-                placeholder="Enter Age"
+                className="text-input-drop-down"
+                placeholder="Enter Intake College Experience"
                 onChange={(event) => this.setState({ age: event.target.value })}
                 value={this.state.age}
                 id="age"
                 required
-              />
-            </div>
-            <div className="field">
-              <label
-                htmlFor="firstLanguage"
-                style={{ color: "black", textAlign: "left" }}
               >
-                Applicant First Language Desc *
-              </label>
-              <input
-                type="text"
-                name="firstLanguage"
-                className="text-input"
-                placeholder="Enter Application First Languauge Description"
-                onChange={(event) =>
-                  this.setState({ firstLanguage: event.target.value })
-                }
-                value={this.state.firstLanguage}
-                id="firstLanguage"
-                required
-              />
+                <option value="">Select Age</option>
+                <option value="0 to 18">0 to 18</option>
+                <option value="19 to 20"> 19 to 20</option>
+                <option value="21 to 25">21 to 25</option>
+                <option value="26 to 30">26 to 30</option>
+                <option value="31 to 35">31 to 35</option>
+                <option value="36 to 40">36 to 40</option>
+                <option value="41 to 45">41 to 45</option>
+                <option value="46 to 50">46 to 50</option>
+                <option value="51 to 55">51 to 55</option>
+                <option value="56 to 60">56 to 60</option>
+              </select>
             </div>
           </div>
           <div

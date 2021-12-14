@@ -5,8 +5,9 @@
   box-shadow: 2px 2px 3px 0 rgba(117, 124, 129, 0.12);
   max-width: 50%;
   border: 1px solid #c8cdd2;
-  margin-top: 4%;
+  margin-top: 2%;
   padding: 12px;
+  margin-bottom: 3%;
 }
 
 input[type="number"] {
@@ -34,7 +35,7 @@ h3 {
 .formFields {
   display: flex;
   justify-content: space-evenly;
-  margin-top: 15px;
+  margin-top: 25px;
 }
 
 .text-input {
@@ -43,6 +44,15 @@ h3 {
   height: 1.75rem;
   padding: 0.625rem 1rem;
   width: 96%;
+  color: black;
+}
+.text-input-drop-down {
+  border-radius: 0.25rem;
+  border: 1px solid #96a0aa;
+  height: 3rem;
+  padding: 0.625rem 1rem;
+  width: 109%;
+  background-color: white;
   color: black;
 }
 
@@ -83,4 +93,37 @@ h3 {
   border-color: #f5c6cb;
   text-align: center;
   padding: 14px;
+}
+
+.formFields1 {
+  display: flex;
+  width: 64%;
+  margin-top: 15px;
+}
+
+.field1 {
+  width: 45%;
+  margin-left: 6%;
+}
+
+.success {
+  color: #155724;
+  background-color: #d4edda;
+  border-color: #c3e6cb;
+  width: 91%;
+  margin: 1%;
+  margin-left: 4%;
+  padding: 15px;
+  text-align: center;
+}
+
+.failure {
+  color: #721c24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+  width: 91%;
+  margin: 1%;
+  margin-left: 4%;
+  padding: 15px;
+  text-align: center;
 }

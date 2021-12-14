@@ -11,18 +11,26 @@ export default function Table() {
   const [success, setSuccess] = useState("");
   const [errors, setErrors] = useState("");
   const [refresh, setRefresh] = useState(true);
+  const [predictions, setPredictions] = useState([]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    axios
+      .get("http://localhost:9000/database/")
+      .then((res) => setPredictions(res.data.result));
+  }, []);
+  console.log(predictions);
 
   return (
     <>
       <Header />
       <div className="form-container" style={{ color: "black" }}>
-        <Dashboard />
+        <Dashboard predictions={predictions} />
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
+            margin: "1%",
+            padding: "15px",
             marginTop: "3%",
           }}
         >
@@ -41,15 +49,15 @@ export default function Table() {
           <thead>
             <tr>
               <th scope="col">#</th>
-              <th scope="col">Intake Term Code</th>
-              <th scope="col">Country Name</th>
-              <th scope="col">Current Status</th>
+              <th scope="col">Program Name</th>
+              <th scope="col">Intake College Experience</th>
+              <th scope="col">Academic Performance</th>
+              <th scope="col">Age</th>
               <th scope="col">Prediction</th>
-              <th scope="col">Predicted at</th>
             </tr>
           </thead>
           <tbody>
-            {/* {incidents.length === 0 || incidents === undefined ? (
+            {predictions.length === 0 || predictions === undefined ? (
               <tr>
                 <td
                   colSpan="6"
@@ -57,68 +65,50 @@ export default function Table() {
                     fontSize: "2rem",
                     fontWeight: "500",
                     marginTop: "2%",
+                    textAlign: "center",
                   }}
                 >
                   No Data
                 </td>
               </tr>
-            ) : ( */}
-            <tr>
-              <td>1</td>
-              <td></td>
-              <td></td>
-              <td>
-                {/* {incident.status === "pending" && (
+            ) : (
+              predictions.map((prediction, id) => (
+                <tr key={id}>
+                  <td>{id + 1}</td>
+                  <td>{prediction.PROGRAM_LONG_NAME}</td>
+                  <td>{prediction.INTAKE_COLLEGE_EXPERIENCE}</td>
+                  <td>{prediction.ACADEMIC_PERFORMANCE}</td>
+                  <td>{prediction.AGE_GROUP_LONG_NAME}</td>
+                  <td>
+                    {prediction.prediction === 0 && (
                       <span
                         className="tableSpan"
                         style={{
                           backgroundColor: "rgba(254, 226, 226)",
                           color: "rgba(153, 27, 27)",
+                          padding: "4px",
                         }}
                       >
-                        {incident.status}
-                      </span>
-                    )}
-                    {incident.status === "in_progress" && (
-                      <span
-                        className="tableSpan"
-                        style={{
-                          backgroundColor: "rgba(254, 243, 199)",
-                          color: "rgba(146, 64, 14)",
-                        }}
-                      >
-                        {incident.status}
+                        UnSuccessfull
                       </span>
                     )}
 
-                    {/* {incident.status === "completed" && (
+                    {prediction.prediction === 1 && (
                       <span
                         className="tableSpan"
                         style={{
                           backgroundColor: "rgba(209, 250, 229)",
                           color: "rgba(6, 95, 70)",
+                          padding: "4px",
                         }}
                       >
-                        {incident.status}
+                        Successfull
                       </span>
-                    )} */}
-                {/* {incident.status === "closed" && (
-                      <span
-                        className="tableSpan"
-                        style={{
-                          backgroundColor: "rgba(224, 231, 255)",
-                          color: "rgba(55, 48, 163)",
-                        }}
-                      >
-                        {incident.status}
-                      </span>
-                    )}  */}
-              </td>
-
-              <td></td>
-              <td>ago</td>
-            </tr>
-            {/* )} */}
+                    )}
+                  </td>
+                </tr>
+              ))
+            )}
           </tbody>
         </table>
       </div>

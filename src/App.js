@@ -8,7 +8,8 @@ import {
 import Admin from "./console/Admin/Admin";
 import Table from "./console/Admin/Table";
 import User from "./console/User/User";
-
+import "./App.css";
+import Graph from "./console/Admin/Graph";
 const App = () => {
   return (
     <Router>
@@ -22,6 +23,7 @@ const RoutesApp = () => {
     { path: "/", element: <User /> },
     { path: "/admin", element: <Admin /> },
     { path: "/dashboard", element: <Table /> },
+    { path: "/graphs", element: <Graph /> },
   ]);
   return routes;
 };
