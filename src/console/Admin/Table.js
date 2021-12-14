@@ -5,7 +5,7 @@ import React, { useContext, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import { titleCase } from "title-case";
 import Header from "../Common/Header";
-import Dashboard from "./dashboard";
+import Dashboard from "./Dashboard";
 
 export default function Table() {
   const [success, setSuccess] = useState("");

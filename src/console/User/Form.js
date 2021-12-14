@@ -1,5 +1,6 @@
 import React, { Component, useState } from "react";
 import "./Form.css";
+import axios from "axios";
 class Form extends Component {
   state = {
     intakeTermCode: "",
@@ -18,9 +19,33 @@ class Form extends Component {
     age: 25,
     firstLanguage: "",
   };
+
+  componentDidMount() {
+    const request = {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ACADEMIC_PERFORMANCE: "AB - Good",
+        AGE_GROUP_LONG_NAME: "21 to 25",
+        CURRENT_STAY_STATUS: "",
+        ENGLISH_TEST_SCORE: 160,
+        EXPECTED_GRAD_TERM_CODE: null,
+        FIRST_YEAR_PERSISTENCE_COUNT: null,
+        HS_AVERAGE_MARKS: 69,
+        INTAKE_COLLEGE_EXPERIENCE: "CE Enrolled",
+        MAILING_POSTAL_CODE_GROUP_3: "M1T",
+        PRIMARY_PROGRAM_CODE: null,
+        PROGRAM_LONG_NAME: "Community and Justice Services",
+        PROGRAM_SEMESTERS: null,
+        TOTAL_PROGRAM_SEMESTERS: null,
+      }),
+    };
+    fetch("http://localhost:9000/predict/", request).then((res) =>
+      console.log("successfull", res)
+    );
+  }
   handleSubmit = (event) => {
     event.preventDefault();
-    console.log(this.state);
   };
 
   render() {
