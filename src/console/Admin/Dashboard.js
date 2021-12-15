@@ -5,20 +5,25 @@ import Header from "../Common/Header";
 export default function Dashboard(props) {
   const [successfull, setSuccessfull] = useState(0);
   const [unSuccessfull, setunSuccessfull] = useState(0);
+  const [inProgress, setInProgress] = useState(0);
 
   useEffect(() => {
     if (props.predictions.length > 0) {
       var successfull = 0;
       var unSuccessfull = 0;
+      var inProgress = 0;
       for (let i = 0; i < props.predictions.length; i++) {
         console.log("entered loop");
         if (props.predictions[i].prediction === 0) {
           unSuccessfull++;
+        } else if (props.predictions[i].prediction === 2) {
+          inProgress++;
         } else {
           successfull++;
         }
       }
       setSuccessfull(successfull);
+      setInProgress(inProgress);
       setunSuccessfull(unSuccessfull);
     }
   }, [props]);
@@ -51,6 +56,16 @@ export default function Dashboard(props) {
             <div
               className="card"
               style={{
+                backgroundColor: "rgba(254, 243, 199)",
+                color: "rgba(146, 64, 14)",
+              }}
+            >
+              <h5 className="fs-3 text">In Progress</h5>
+              <p>{inProgress}</p>
+            </div>
+            <div
+              className="card"
+              style={{
                 backgroundColor: "rgba(254, 226, 226)",
                 color: "rgba(153, 27, 27)",
               }}
@@ -67,7 +82,7 @@ export default function Dashboard(props) {
               }}
             >
               <h5 className="fs-3 text">Model Accuracy</h5>
-              <p>93%</p>
+              <p>93.5%</p>
             </div>
           </div>
         </div>

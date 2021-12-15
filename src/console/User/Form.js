@@ -12,7 +12,7 @@ class Form extends Component {
     mailingCountryName: "Canada",
     currentStayStatus: "",
     academicPerformance: "",
-    gradTermCode:200705 ,
+    gradTermCode: 200705,
     persistanceCount: "",
     averageMarks: 74,
     englishTestScore: 160,
@@ -20,6 +20,7 @@ class Form extends Component {
     success: "",
     failure: "",
     error: "",
+    inProgress: "",
   };
 
   handleSubmit = async (event) => {
@@ -49,25 +50,36 @@ class Form extends Component {
         console.log(data.prediction);
         if (data.prediction == 1) {
           this.setState({
-            success: "Model predicts the student is Successfull ",
+            success: "Model predicts SUCCESSFULL. ",
             failure: "",
+            inProgress: "",
+          });
+        } else if (data.prediction == 0) {
+          this.setState({
+            success: "",
+            failure: "Model predicts UNSUCCESSFULL.  ",
+            inProgress: "",
           });
         } else {
           this.setState({
             success: "",
-            failure: "Model predicts the student is UnSuccessfull ",
+            failure: "",
+            inProgress: "Model predicts IN_PROGRESS. ",
           });
         }
       });
   };
 
   render() {
-    const { success, failure } = this.state;
+    const { success, failure, inProgress } = this.state;
     return (
       <div className="form-container">
         <h3>Predict</h3>
         {success && success.length > 0 && <p className="success">{success}</p>}
         {failure && failure.length > 0 && <p className="failure">{failure}</p>}
+        {inProgress && inProgress.length > 0 && (
+          <p className="warning">{inProgress}</p>
+        )}
 
         <form onSubmit={this.handleSubmit}>
           <div className="formFields">

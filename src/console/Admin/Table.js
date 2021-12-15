@@ -31,7 +31,7 @@ export default function Table() {
             justifyContent: "space-between",
             margin: "1%",
             padding: "15px",
-            marginTop: "3%",
+            marginTop: "1%",
           }}
         >
           <h1>Predictions</h1>
@@ -87,9 +87,24 @@ export default function Table() {
                           backgroundColor: "rgba(254, 226, 226)",
                           color: "rgba(153, 27, 27)",
                           padding: "4px",
+                          borderRadius: "5px",
                         }}
                       >
-                        UnSuccessfull
+                        UNSUCCESSFULL
+                      </span>
+                    )}
+
+                    {prediction.prediction === 2 && (
+                      <span
+                        className="tableSpan"
+                        style={{
+                          backgroundColor: "rgba(254, 243, 199)",
+                          color: "rgba(146, 64, 14)",
+                          padding: "4px",
+                          borderRadius: "5px",
+                        }}
+                      >
+                        IN_PROGRESS
                       </span>
                     )}
 
@@ -100,9 +115,10 @@ export default function Table() {
                           backgroundColor: "rgba(209, 250, 229)",
                           color: "rgba(6, 95, 70)",
                           padding: "4px",
+                          borderRadius: "5px",
                         }}
                       >
-                        Successfull
+                        SUCCESSFULL
                       </span>
                     )}
                   </td>

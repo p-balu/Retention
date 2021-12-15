@@ -127,3 +127,14 @@ h3 {
   padding: 15px;
   text-align: center;
 }
+
+.warning {
+  color: #856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+  width: 91%;
+  margin: 1%;
+  margin-left: 4%;
+  padding: 15px;
+  text-align: center;
+}
